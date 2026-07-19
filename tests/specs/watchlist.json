@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Watchlist shows empty state",
+    "steps": [
+      {
+        "send": { "callback": "watchlist:show" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Your watchlist is empty.\n\nTap ➕ Add coin to get started."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Watchlist shows coin after adding",
+    "steps": [
+      {
+        "send": { "callback": "preset:BTC:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Bitcoin (BTC) added to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:show" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Your watchlist (1 coin):"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Remove coin from watchlist",
+    "steps": [
+      {
+        "send": { "callback": "preset:BTC:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Bitcoin (BTC) added to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:confirm_remove:BTC" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Remove Bitcoin (BTC) from your watchlist?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:remove:BTC" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "❌ BTC removed from your watchlist."
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

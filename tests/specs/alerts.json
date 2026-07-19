@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Alerts shows empty state when watchlist is empty",
+    "steps": [
+      {
+        "send": { "callback": "alerts:show" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "No alerts — your watchlist is empty.\n\nAdd coins first, then set alert rules."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alerts shows watchlist after adding coin",
+    "steps": [
+      {
+        "send": { "callback": "preset:BTC:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Bitcoin (BTC) added to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alerts:show" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Alert rules for your watchlist:"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Manage alerts for BTC",
+    "steps": [
+      {
+        "send": { "callback": "preset:BTC:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Bitcoin (BTC) added to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alerts:manage:BTC" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Alert rules for Bitcoin (BTC):\n\nPercent move alerts:\n  5% in 1h"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

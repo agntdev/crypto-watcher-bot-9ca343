@@ -1,19 +1,60 @@
 [
   {
-    "name": "Add preset coin",
+    "name": "Add preset coin shows options",
     "steps": [
       {
+        "send": { "callback": "add_preset" },
         "expect": [
           {
-            "method": "sendMessage",
+            "method": "editMessageText",
             "payload": {
-              "text": "Add Bitcoin/Ethereum/Toncoin to watchlist"
+              "text": "Pick a coin to add to your watchlist:"
             }
           }
-        ],
-        "send": {
-          "callback": "add_preset"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Add BTC from preset",
+    "steps": [
+      {
+        "send": { "callback": "add_preset" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Pick a coin to add to your watchlist:"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "preset:BTC:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Bitcoin (BTC) added to your watchlist."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Add ETH from preset",
+    "steps": [
+      {
+        "send": { "callback": "preset:ETH:add" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "✅ Ethereum (ETH) added to your watchlist."
+            }
+          }
+        ]
       }
     ]
   }

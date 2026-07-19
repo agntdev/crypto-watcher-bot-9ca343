@@ -1,19 +1,71 @@
 [
   {
-    "name": "/settings",
+    "name": "/settings shows settings panel",
     "steps": [
       {
+        "send": { "text": "/settings" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Configure quiet hours, summary time, and alert preferences"
+              "text": "Your settings:\n\nQuiet hours: Not set\nMorning summary: Not set\nPrice alerts: On\nDaily summary: On"
             }
           }
-        ],
-        "send": {
-          "text": "/settings"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Toggle alerts off",
+    "steps": [
+      {
+        "send": { "text": "/settings" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Your settings:\n\nQuiet hours: Not set\nMorning summary: Not set\nPrice alerts: On\nDaily summary: On"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "settings:toggle_alerts" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Your settings:\n\nQuiet hours: Not set\nMorning summary: Not set\nPrice alerts: Off\nDaily summary: On"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Toggle summary off",
+    "steps": [
+      {
+        "send": { "text": "/settings" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Your settings:\n\nQuiet hours: Not set\nMorning summary: Not set\nPrice alerts: On\nDaily summary: On"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "settings:toggle_summary" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": {
+              "text": "Your settings:\n\nQuiet hours: Not set\nMorning summary: Not set\nPrice alerts: On\nDaily summary: Off"
+            }
+          }
+        ]
       }
     ]
   }
