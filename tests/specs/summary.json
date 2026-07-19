@@ -1,19 +1,17 @@
 [
   {
-    "name": "/summary",
+    "name": "/summary shows empty watchlist",
     "steps": [
       {
+        "send": { "text": "/summary" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Request immediate price summary"
+              "text": "Your watchlist is empty.\n\nTap ➕ Add coin to see a summary."
             }
           }
-        ],
-        "send": {
-          "text": "/summary"
-        }
+        ]
       }
     ]
   }
